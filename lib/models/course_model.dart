@@ -16,7 +16,7 @@ class Course {
   });
 
   // Convert a Course object to a Map
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
       'id': id,
       'name': name,
@@ -28,7 +28,7 @@ class Course {
   }
 
   // Convert a Map to a Course object
-  factory Course.fromMap(Map<String, dynamic> map) {
+  factory Course.fromJson(Map<String, dynamic> map) {
     return Course(
       id: map['id'] ?? '',
       name: map['name'] ?? '',

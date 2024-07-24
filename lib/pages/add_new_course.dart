@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:madman/models/course_model.dart';
+import 'package:madman/services/course_service.dart';
 import 'package:madman/widgets/sample_button.dart';
 import 'package:madman/widgets/sample_input.dart';
 
@@ -16,17 +19,51 @@ class AddCourseScreen extends StatelessWidget {
 
   AddCourseScreen({super.key});
 
-  void _submitForm(BuildContext context) {
+  void _submitForm(BuildContext context) async {
     if (_formKey.currentState?.validate() ?? false) {
       // Save form
       _formKey.currentState?.save();
 
       // Add course to Firestore or any other storage here
+      try {
+        // Create a new course
+        final Course course = Course(
+          id: '',
+          name: _courseNameController.text,
+          description: _courseDescriptionController.text,
+          duration: _courseDurationController.text,
+          schedule: _courseScheduleController.text,
+          instructor: _courseInstructorController.text,
+        );
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Course added successfully!')),
-      );
-      Navigator.pop(context);
+        await CourseService().createCourse(course);
+
+        // Show success SnackBar
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Course added successfully!'),
+            duration: Duration(
+              seconds: 1,
+            ),
+          ),
+        );
+
+        // Delay navigation to ensure SnackBar is displayed
+        await Future.delayed(const Duration(seconds: 2));
+
+        // Navigate to the home page
+        GoRouter.of(context).go('/');
+      } catch (error) {
+        print(error);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Failed to add course!'),
+            duration: Duration(
+              seconds: 1,
+            ),
+          ),
+        );
+      }
     }
   }
 
