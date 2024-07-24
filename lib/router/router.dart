@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:madman/models/course_model.dart';
 import 'package:madman/pages/add_new_assignment.dart';
 import 'package:madman/pages/add_new_course.dart';
+import 'package:madman/pages/create_note.dart';
 import 'package:madman/pages/home_page.dart';
+import 'package:madman/pages/single_course_page.dart';
 
 class RouterClass {
   final router = GoRouter(
@@ -40,7 +43,33 @@ class RouterClass {
         name: "add Assignment",
         path: "/add-assignment",
         builder: (context, state) {
-          return AddAssignmentScreen();
+          final Course course = state.extra as Course;
+
+          return AddAssignmentScreen(
+            courseId: course.id,
+          );
+        },
+      ),
+
+      //add Note
+      GoRoute(
+        name: "add Note",
+        path: "/add-notes",
+        builder: (context, state) {
+          final Course course = state.extra as Course;
+
+          return CreateNotePage(
+            courseId: course.id,
+          );
+        },
+      ),
+
+      //Single Course
+      GoRoute(
+        path: '/single-course',
+        builder: (context, state) {
+          final Course course = state.extra as Course;
+          return SingleCourseScreen(course: course);
         },
       ),
     ],

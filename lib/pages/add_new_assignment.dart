@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:madman/models/assignment_model.dart';
+import 'package:madman/services/database/assignment_service.dart';
 import 'package:madman/widgets/sample_button.dart';
 import 'package:madman/widgets/sample_input.dart';
 
@@ -15,7 +18,12 @@ class AddAssignmentScreen extends StatelessWidget {
   final ValueNotifier<TimeOfDay> _selectedTime =
       ValueNotifier<TimeOfDay>(TimeOfDay.now());
 
-  AddAssignmentScreen({super.key}) {
+  final String courseId;
+
+  AddAssignmentScreen({
+    super.key,
+    required this.courseId,
+  }) {
     // Initialize ValueNotifiers with current date and time
     _selectedDate.value = DateTime.now();
     _selectedTime.value = TimeOfDay.now();
@@ -45,13 +53,49 @@ class AddAssignmentScreen extends StatelessWidget {
     }
   }
 
-  void _submitForm(BuildContext context) {
+  void _submitForm(BuildContext context) async {
     if (_formKey.currentState?.validate() ?? false) {
       // Add assignment to Firestore or any other storage here
+      try {
+        // create a new assignment
+        final Assignment assignment = Assignment(
+          id: "",
+          name: _assignmentNameController.text,
+          description: _assignmentDescriptionController.text,
+          duration: _assignmentDurationController.text,
+          dueDate: _selectedDate.value,
+          dueTime: _selectedTime.value,
+        );
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Assignment added successfully!')),
-      );
+        // Add the assignment to the database
+        AssignmentService().createAssignment(courseId, assignment);
+        // Show success SnackBar
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Assignment added successfully!"),
+            duration: Duration(
+              seconds: 1,
+            ),
+          ),
+        );
+
+        // Delay navigation to ensure SnackBar is displayed
+        await Future.delayed(const Duration(seconds: 2));
+
+        // Navigate to the home page
+        GoRouter.of(context).go('/');
+      } catch (error) {
+        print('Error adding assignment: $error');
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Failed to add assignment!"),
+            duration: Duration(
+              seconds: 1,
+            ),
+          ),
+        );
+      }
+
       Navigator.pop(context);
     }
   }

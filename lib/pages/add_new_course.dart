@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:madman/models/course_model.dart';
-import 'package:madman/services/course_service.dart';
+import 'package:madman/services/database/course_service.dart';
 import 'package:madman/widgets/sample_button.dart';
 import 'package:madman/widgets/sample_input.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:madman/constants/colors.dart';
 import 'package:madman/models/course_model.dart'; // Ensure this import matches your file structure
-import 'package:madman/services/course_service.dart'; // Ensure this import matches your file structure
+import 'package:madman/services/database/course_service.dart'; // Ensure this import matches your file structure
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -122,11 +122,25 @@ class MainScreen extends StatelessWidget {
                             color: lightGreen,
                             margin: const EdgeInsets.symmetric(vertical: 8),
                             child: ListTile(
-                              title: Text(course.name),
-                              subtitle: Text(course.description),
-                              trailing: Text(course.schedule),
+                              title: Text(
+                                course.name,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                ),
+                              ),
+                              subtitle: Text(
+                                course.description,
+                                style: const TextStyle(
+                                  color: Colors.black45,
+                                  fontSize: 13,
+                                ),
+                              ),
                               onTap: () {
-                                // Handle course item tap
+                                GoRouter.of(context).push(
+                                  '/single-course',
+                                  extra: course,
+                                );
                               },
                             ),
                           );

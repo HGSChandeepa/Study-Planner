@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:madman/models/assignment_model.dart';
 import 'package:madman/models/course_model.dart';
 
 class CourseService {
@@ -62,6 +63,19 @@ class CourseService {
       await courseCollection.doc(course.id).update(data);
     } catch (e) {
       print(e);
+    }
+  }
+
+  //create a new assignment in to a course
+  Future<void> createAssignment(String courseId, Assignment assignment) async {
+    try {
+      final Map<String, dynamic> data = assignment.toJson();
+      final CollectionReference assignmentCollection = courseCollection
+          .doc(courseId)
+          .collection('assignments');
+      await assignmentCollection.add(data);
+    } catch (error) {
+      print(error);
     }
   }
 }
