@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "554759914642",
+    "project_id": "munro-d5bcd",
+    "storage_bucket": "munro-d5bcd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554759914642:android:a48223afde88f9f7d0924b",
+        "android_client_info": {
+          "package_name": "com.example.madman"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdSHNOodV_JnmRfHHGof6RlrK2EzZRsqA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
