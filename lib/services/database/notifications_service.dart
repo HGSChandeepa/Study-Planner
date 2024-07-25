@@ -27,7 +27,7 @@ class NotificationsService {
               await notificationCollection.add({
                 'assignmentId': assignment.id,
                 'courseName': courseName,
-                'title': assignment.name,
+                'assignmentName': assignment.name,
                 'description': assignment.description,
                 'dueDate': assignment.dueDate,
                 'time': Timestamp.now(),

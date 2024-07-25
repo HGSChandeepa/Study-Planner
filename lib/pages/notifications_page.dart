@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:madman/constants/colors.dart';
 import 'package:madman/models/notification_model.dart';
 import 'package:madman/services/database/notifications_service.dart';
 
@@ -42,14 +43,39 @@ class NotificationsScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Course: ${notification.courseName}'),
-                    Text(
-                        'Due Date: ${DateFormat.yMMMd().format(notification.dueDate)}'),
-                    Text('Time Passed: ${notification.timePassed}'),
-                  ],
+                subtitle: Container(
+                  decoration: BoxDecoration(
+                    color: primaryColor,
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Course: ${notification.courseName}',
+                            style: const TextStyle(
+                              color: Colors.black,
+                            )),
+                        Text('Assignment: ${notification.assignmentName}',
+                            style: const TextStyle(
+                              color: Colors.black,
+                            )),
+                        Text(
+                          'Due Date: ${DateFormat.yMMMd().format(notification.dueDate)}',
+                          style: const TextStyle(
+                            color: Colors.black,
+                          ),
+                        ),
+                        Text(
+                          'Time: ${(notification.dueDate.difference(DateTime.now()).inHours).toString()} hours',
+                          style: const TextStyle(
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               );
             },

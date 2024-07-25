@@ -15,10 +15,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
         fontFamily: GoogleFonts.poppins().fontFamily,
+        brightness: Brightness.dark,
+        snackBarTheme: const SnackBarThemeData(
+          backgroundColor: Colors.black,
+          contentTextStyle: TextStyle(color: Colors.white),
+        ),
       ),
       routerConfig: RouterClass().router,
     );

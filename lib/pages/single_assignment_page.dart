@@ -10,9 +10,7 @@ class SingleAssignmentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Assignment: ${assignment.name}'),
-      ),
+      appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -26,32 +24,50 @@ class SingleAssignmentScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
-            Text(
+            const Text(
               'Description:',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Text(assignment.description),
-            const SizedBox(height: 10),
             Text(
+              assignment.description,
+              style: const TextStyle(
+                fontSize: 14,
+                color: Colors.grey,
+              ),
+            ),
+            const SizedBox(height: 10),
+            const Text(
               'Due Date:',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Text(DateFormat.yMMMd().format(assignment.dueDate)),
-            const SizedBox(height: 10),
             Text(
-              'Time:',
+              DateFormat.yMMMd().format(assignment.dueDate),
               style: const TextStyle(
+                fontSize: 14,
+                color: Colors.grey,
+              ),
+            ),
+            const SizedBox(height: 10),
+            const Text(
+              'Time:',
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Text(DateFormat.Hm().format(assignment.dueDate)),
+            Text(
+              DateFormat.Hm().format(assignment.dueDate),
+              style: const TextStyle(
+                fontSize: 14,
+                color: Colors.grey,
+              ),
+            ),
           ],
         ),
       ),

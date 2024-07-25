@@ -33,7 +33,6 @@ class CourseInputField extends StatelessWidget {
             borderRadius: BorderRadius.circular(12.0),
           ),
           filled: true,
-          fillColor: Colors.grey[100],
           contentPadding:
               const EdgeInsets.symmetric(vertical: 13.0, horizontal: 12.0),
         ),

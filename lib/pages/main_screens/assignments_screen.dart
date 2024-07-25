@@ -21,15 +21,15 @@ class AssignmentsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Trigger the method when the screen is loaded
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _checkAndStoreOverdueAssignments();
     });
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Assignments',
           style: TextStyle(
-            color: primaryColor,
+            color: Colors.white,
             fontSize: 22,
             fontWeight: FontWeight.bold,
           ),
@@ -91,10 +91,22 @@ class AssignmentsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                            'Due Date: ${DateFormat.yMMMd().format(assignment.dueDate)}'),
-                        Text('Duration: ${assignment.duration} hours'),
-                        Text('Description: ${assignment.description}'),
-                        CountdownTimer(dueDate: assignment.dueDate),
+                            'Due Date: ${DateFormat.yMMMd().format(assignment.dueDate)},', style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.white38,
+                          ),),
+                        Text(
+                          'Duration: ${assignment.duration} hours',
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.white38,
+                          ),
+                        ),
+                        Text('Description: ${assignment.description}', style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.white38,
+                          ),),
+                        CountdownTimer(dueDate: assignment.dueDate,),
                       ],
                     ),
                   );

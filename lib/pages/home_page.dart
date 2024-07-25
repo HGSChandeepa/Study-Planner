@@ -5,6 +5,8 @@ import 'package:madman/pages/main_screens/courses_screen.dart';
 import 'package:madman/pages/main_screens/main_screen.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }

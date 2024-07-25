@@ -15,7 +15,17 @@ class Course {
     required this.instructor,
   });
 
-  // Convert a Course object to a Map
+  factory Course.fromJson(Map<String, dynamic> json) {
+    return Course(
+      id: json['id'] ?? '',
+      name: json['name'] ?? '',
+      description: json['description'] ?? '',
+      duration: json['duration'] ?? '',
+      schedule: json['schedule'] ?? '',
+      instructor: json['instructor'] ?? '',
+    );
+  }
+
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -25,17 +35,5 @@ class Course {
       'schedule': schedule,
       'instructor': instructor,
     };
-  }
-
-  // Convert a Map to a Course object
-  factory Course.fromJson(Map<String, dynamic> map) {
-    return Course(
-      id: map['id'] ?? '',
-      name: map['name'] ?? '',
-      description: map['description'] ?? '',
-      duration: map['duration'] ?? '',
-      schedule: map['schedule'] ?? '',
-      instructor: map['instructor'] ?? '',
-    );
   }
 }

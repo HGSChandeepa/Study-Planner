@@ -1,12 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:madman/constants/colors.dart';
-import 'package:madman/models/course_model.dart'; // Ensure this import matches your file structure
+import 'package:madman/models/course_model.dart';
+import 'package:madman/services/database/course_service.dart';
+import 'package:madman/widgets/sample_button.dart'; // Ensure this import matches your file structure
 
 class SingleCourseScreen extends StatelessWidget {
   final Course course; // Course object passed to this screen
 
   const SingleCourseScreen({super.key, required this.course});
+
+  //Methode to delete the course
+  void _deleteCourse(BuildContext context) async {
+    //delete the course
+    try {
+      await CourseService().deleteCourse(course.id);
+      //navigate to the courses screen
+      GoRouter.of(context).go('/');
+    } catch (error) {
+      print('Error deleting course: $error');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +36,7 @@ class SingleCourseScreen extends StatelessWidget {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: darkGreen,
+                color: Colors.white,
               ),
             ),
             const SizedBox(height: 5),
@@ -30,7 +44,7 @@ class SingleCourseScreen extends StatelessWidget {
               'Instructor: ${course.instructor}',
               style: const TextStyle(
                 fontSize: 13,
-                color: Colors.black54,
+                color: Colors.white60,
               ),
             ),
             const SizedBox(height: 5),
@@ -38,7 +52,7 @@ class SingleCourseScreen extends StatelessWidget {
               'Duration: ${course.duration}',
               style: const TextStyle(
                 fontSize: 13,
-                color: Colors.black54,
+                color: Colors.white60,
               ),
             ),
             const SizedBox(height: 5),
@@ -46,7 +60,7 @@ class SingleCourseScreen extends StatelessWidget {
               'Schedule: ${course.schedule}',
               style: const TextStyle(
                 fontSize: 13,
-                color: Colors.black54,
+                color: Colors.white60,
               ),
             ),
             const SizedBox(height: 20),
@@ -55,7 +69,7 @@ class SingleCourseScreen extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: Colors.black87,
+                color: Colors.white,
               ),
             ),
             const SizedBox(height: 10),
@@ -63,7 +77,7 @@ class SingleCourseScreen extends StatelessWidget {
               course.description,
               style: const TextStyle(
                 fontSize: 13,
-                color: Colors.black87,
+                color: Colors.white60,
               ),
             ),
             const SizedBox(height: 30),
@@ -72,10 +86,10 @@ class SingleCourseScreen extends StatelessWidget {
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width * 0.45,
-                  height: MediaQuery.of(context).size.height * 0.4,
+                  height: MediaQuery.of(context).size.height * 0.3,
                   decoration: BoxDecoration(
                     color: lightGreen,
-                    borderRadius: BorderRadius.circular(5),
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   child: TextButton(
                     onPressed: () {
@@ -111,10 +125,10 @@ class SingleCourseScreen extends StatelessWidget {
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width * 0.45,
-                  height: MediaQuery.of(context).size.height * 0.4,
+                  height: MediaQuery.of(context).size.height * 0.3,
                   decoration: BoxDecoration(
                     color: lightGreen,
-                    borderRadius: BorderRadius.circular(5),
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   child: TextButton(
                     onPressed: () {
@@ -149,7 +163,13 @@ class SingleCourseScreen extends StatelessWidget {
                   ),
                 ),
               ],
-            )
+            ),
+            //delete button
+            const SizedBox(height: 20),
+            CustomElevatedButton(
+              text: 'Delete Course',
+              onPressed: () => _deleteCourse(context),
+            ),
           ],
         ),
       ),

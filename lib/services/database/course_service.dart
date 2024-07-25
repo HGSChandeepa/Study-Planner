@@ -82,11 +82,11 @@ class CourseService {
   Future<List<Course>> getCourses() async {
     try {
       final QuerySnapshot snapshot = await courseCollection.get();
-      return snapshot.docs
-          .map((doc) => Course.fromJson(doc.data() as Map<String, dynamic>))
-          .toList();
+      return snapshot.docs.map((doc) {
+        return Course.fromJson(doc.data() as Map<String, dynamic>);
+      }).toList();
     } catch (error) {
-      print(error);
+      print('Error fetching courses: $error');
       return [];
     }
   }

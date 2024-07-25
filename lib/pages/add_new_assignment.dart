@@ -166,7 +166,7 @@ class AddAssignmentScreen extends StatelessWidget {
                   'Due Date and Time',
                   style: TextStyle(
                     fontSize: 16,
-                    color: Colors.black54,
+                    color: Colors.white60,
                   ),
                 ),
                 const SizedBox(height: 16),

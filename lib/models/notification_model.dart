@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class NotificationModel {
   final String id;
+
   final String assignmentName;
   final String courseName;
   final DateTime dueDate;

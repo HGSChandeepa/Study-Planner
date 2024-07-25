@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:madman/constants/colors.dart';
 import 'package:madman/models/course_model.dart'; // Ensure this import matches your file structure
@@ -34,7 +35,10 @@ class MainScreen extends StatelessWidget {
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
                         backgroundColor: primaryColor,
-                        padding: const EdgeInsets.symmetric(horizontal: 5),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 5,
+                          vertical: 0,
+                        ),
                       ),
                       child: TextButton.icon(
                         onPressed: () {
@@ -55,7 +59,7 @@ class MainScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 30),
                 const Text(
                   'Your study planner helps you to keep track of your study progress and manage your time effectively.',
                   style: TextStyle(
@@ -68,7 +72,7 @@ class MainScreen extends StatelessWidget {
                 const Text(
                   'Courses',
                   style: TextStyle(
-                    color: Colors.black,
+                    color: Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
@@ -80,6 +84,7 @@ class MainScreen extends StatelessWidget {
                     fontSize: 14,
                   ),
                 ),
+                const SizedBox(height: 10),
                 StreamBuilder<List<Course>>(
                   stream: courseService.courses,
                   builder: (context, snapshot) {
@@ -90,15 +95,17 @@ class MainScreen extends StatelessWidget {
                     } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                       return Center(
                           child: Padding(
-                        padding: const EdgeInsets.all(20.0),
+                        padding: EdgeInsets.symmetric(
+                            vertical: MediaQuery.of(context).size.height / 5),
                         child: Column(
                           children: [
                             Image.asset(
                               'assets/course.png',
-                              width: 60,
+                              width: 200,
                             ),
+                            const SizedBox(height: 10),
                             const Text(
-                              'No courses available.',
+                              'No courses available.Feel free to add a course!',
                               style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 13,
@@ -121,27 +128,30 @@ class MainScreen extends StatelessWidget {
                             elevation: 0,
                             color: lightGreen,
                             margin: const EdgeInsets.symmetric(vertical: 8),
-                            child: ListTile(
-                              title: Text(
-                                course.name,
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 15,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              child: ListTile(
+                                title: Text(
+                                  course.name,
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                  ),
                                 ),
-                              ),
-                              subtitle: Text(
-                                course.description,
-                                style: const TextStyle(
-                                  color: Colors.black45,
-                                  fontSize: 13,
+                                subtitle: Text(
+                                  course.description,
+                                  style: const TextStyle(
+                                    color: Colors.black87,
+                                    fontSize: 12,
+                                  ),
                                 ),
+                                onTap: () {
+                                  GoRouter.of(context).push(
+                                    '/single-course',
+                                    extra: course,
+                                  );
+                                },
                               ),
-                              onTap: () {
-                                GoRouter.of(context).push(
-                                  '/single-course',
-                                  extra: course,
-                                );
-                              },
                             ),
                           );
                         },
