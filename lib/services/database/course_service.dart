@@ -70,12 +70,24 @@ class CourseService {
   Future<void> createAssignment(String courseId, Assignment assignment) async {
     try {
       final Map<String, dynamic> data = assignment.toJson();
-      final CollectionReference assignmentCollection = courseCollection
-          .doc(courseId)
-          .collection('assignments');
+      final CollectionReference assignmentCollection =
+          courseCollection.doc(courseId).collection('assignments');
       await assignmentCollection.add(data);
     } catch (error) {
       print(error);
+    }
+  }
+
+  //get cousers as list
+  Future<List<Course>> getCourses() async {
+    try {
+      final QuerySnapshot snapshot = await courseCollection.get();
+      return snapshot.docs
+          .map((doc) => Course.fromJson(doc.data() as Map<String, dynamic>))
+          .toList();
+    } catch (error) {
+      print(error);
+      return [];
     }
   }
 }

@@ -34,4 +34,42 @@ class NoteService {
       print(error);
     }
   }
+
+  //get notes with course id
+  Stream<List<Note>> getNotes(String courseId) {
+    try {
+      final CollectionReference notesCollection =
+          courseCollection.doc(courseId).collection('notes');
+      return notesCollection.snapshots().map((snapshot) {
+        return snapshot.docs
+            .map((doc) => Note.fromJson(doc.data() as Map<String, dynamic>))
+            .toList();
+      });
+    } catch (error) {
+      print(error);
+      return Stream.empty();
+    }
+  }
+
+  //get all assignments with the course name
+  Future<Map<String, List<Note>>> getNotesWithCourseName() async {
+    try {
+      final QuerySnapshot snapshot = await courseCollection.get();
+      final Map assignmentsMap = <String, List<Note>>{};
+      for (final doc in snapshot.docs) {
+        //current course id
+        final String courseId = doc.id;
+        final List<Note> notes = await getNotes(courseId).first;
+        //print a note
+        print(notes.first.imageUrl);
+
+        assignmentsMap[doc['name']] = notes;
+      }
+
+      return assignmentsMap as Map<String, List<Note>>;
+    } catch (error) {
+      print(error);
+      return {};
+    }
+  }
 }

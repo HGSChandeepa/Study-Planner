@@ -19,10 +19,9 @@ class Assignment {
   });
 
   // Convert a map from Firestore to an Assignment instance
-  factory Assignment.fromJson(DocumentSnapshot doc) {
-    final data = doc.data() as Map<String, dynamic>;
+  factory Assignment.fromJson(Map<String, dynamic> data) {
     return Assignment(
-      id: doc.id,
+      id: data['id'] ?? '',
       name: data['name'] ?? '',
       description: data['description'] ?? '',
       duration: data['duration'] ?? '',

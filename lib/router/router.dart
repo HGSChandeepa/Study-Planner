@@ -72,6 +72,17 @@ class RouterClass {
           return SingleCourseScreen(course: course);
         },
       ),
+
+      // //single assignment
+      // GoRoute(
+      //   path: '/single-assignment',
+      //   builder: (context, state) {
+      //     final Course course = state.extra as Course;
+      //     return S(course: course);
+      //   },
+      // ),
+
+      // //single note
     ],
   );
 }

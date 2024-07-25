@@ -7,6 +7,7 @@ class Note {
   final String section;
   final String references;
   final File? imageData;
+  final String? imageUrl;
 
   Note({
     required this.id,
@@ -15,6 +16,7 @@ class Note {
     required this.section,
     required this.references,
     this.imageData,
+    this.imageUrl,
   });
 
   // Convert a Note instance into a Map
@@ -25,6 +27,7 @@ class Note {
       'section': section,
       'references': references,
       'imageData': imageData,
+      'imageUrl': imageUrl,
     };
   }
 
@@ -37,6 +40,7 @@ class Note {
       section: json['section'] ?? '',
       references: json['references'] ?? '',
       imageData: json['imageData'],
+      imageUrl: json['imageUrl'],
     );
   }
 }
