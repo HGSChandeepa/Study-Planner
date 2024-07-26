@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:madman/constants/colors.dart';
-import 'package:madman/models/course_model.dart'; // Ensure this import matches your file structure
-import 'package:madman/services/database/course_service.dart'; // Ensure this import matches your file structure
+import 'package:madman/models/course_model.dart'; 
+import 'package:madman/services/database/course_service.dart'; 
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
