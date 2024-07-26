@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:madman/models/notification_model.dart';
 import 'package:madman/services/database/assignment_service.dart';
 
@@ -24,14 +23,16 @@ class NotificationsService {
 
           if (snapshot.docs.isEmpty) {
             if (DateTime.now().isAfter(assignment.dueDate)) {
-              await notificationCollection.add({
-                'assignmentId': assignment.id,
-                'courseName': courseName,
-                'assignmentName': assignment.name,
-                'description': assignment.description,
-                'dueDate': assignment.dueDate,
-                'time': Timestamp.now(),
-              });
+              final notification = NotificationModel(
+                assignmentId: assignment.id,
+                assignmentName: assignment.name,
+                courseName: courseName,
+                description: assignment.description,
+                dueDate: assignment.dueDate,
+                timePassed: 'Overdue',
+              );
+
+              await notificationCollection.add(notification.toJson());
             }
           }
         }
