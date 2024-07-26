@@ -6,7 +6,7 @@ import 'package:madman/services/database/course_service.dart';
 import 'package:madman/widgets/sample_button.dart'; 
 
 class SingleCourseScreen extends StatelessWidget {
-  final Course course; // Course object passed to this screen
+  final Course course; 
 
   const SingleCourseScreen({super.key, required this.course});
 
