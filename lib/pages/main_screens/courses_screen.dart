@@ -115,6 +115,7 @@ class CoursesScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: courseAssignments.map((assignment) {
                             return Container(
+                              margin: EdgeInsets.only(bottom: 5),
                               decoration: BoxDecoration(
                                   color: Colors.black12,
                                   borderRadius: BorderRadius.circular(5.0)),
@@ -145,6 +146,7 @@ class CoursesScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: courseNotes.map((note) {
                             return Container(
+                              margin: EdgeInsets.only(bottom: 5),
                               decoration: BoxDecoration(
                                   color: Colors.black12,
                                   borderRadius: BorderRadius.circular(5.0)),
