@@ -3,10 +3,10 @@ import 'package:go_router/go_router.dart';
 import 'package:madman/constants/colors.dart';
 import 'package:madman/models/course_model.dart';
 import 'package:madman/services/database/course_service.dart';
-import 'package:madman/widgets/sample_button.dart'; // Ensure this import matches your file structure
+import 'package:madman/widgets/sample_button.dart'; 
 
 class SingleCourseScreen extends StatelessWidget {
-  final Course course; // Course object passed to this screen
+  final Course course; 
 
   const SingleCourseScreen({super.key, required this.course});
 
