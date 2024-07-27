@@ -19,10 +19,6 @@ class CoursesScreen extends StatelessWidget {
           await AssignmentService().getAssignmentsWithCourseName();
       final notesMap = await NoteService().getNotesWithCourseName();
 
-      print('Courses: $courses');
-      print('Assignments: $assignmentsMap');
-      print('Notes: $notesMap');
-
       return {
         'courses': courses,
         'assignments': assignmentsMap,
@@ -42,12 +38,8 @@ class CoursesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Courses',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        title: const Text('Courses',
+            style: TextStyle(fontWeight: FontWeight.bold)),
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications),
@@ -94,78 +86,48 @@ class CoursesScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        course.name,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
+                      Text(course.name,
+                          style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white)),
                       const SizedBox(height: 10),
-                      Text(
-                        'Description: ${course.description}',
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: Colors.white60,
-                        ),
-                      ),
+                      Text('Description: ${course.description}',
+                          style: const TextStyle(
+                              fontSize: 14, color: Colors.white60)),
                       const SizedBox(height: 10),
-                      Text(
-                        'Duration: ${course.duration}',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: lightGreen,
-                        ),
-                      ),
+                      Text('Duration: ${course.duration}',
+                          style: TextStyle(fontSize: 14, color: lightGreen)),
                       const SizedBox(height: 5),
-                      Text(
-                        'Schedule: ${course.schedule}',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: lightGreen,
-                        ),
-                      ),
+                      Text('Schedule: ${course.schedule}',
+                          style: TextStyle(fontSize: 14, color: lightGreen)),
                       const SizedBox(height: 5),
-                      Text(
-                        'Instructor: ${course.instructor}',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: lightGreen,
-                        ),
-                      ),
+                      Text('Instructor: ${course.instructor}',
+                          style: TextStyle(fontSize: 14, color: lightGreen)),
                       const SizedBox(height: 20),
                       if (courseAssignments.isNotEmpty) ...[
-                        Text(
-                          'Assignments',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: primaryColor,
-                          ),
-                        ),
+                        Text('Assignments',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: primaryColor)),
                         const SizedBox(height: 10),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: courseAssignments.map((assignment) {
                             return Container(
                               decoration: BoxDecoration(
-                                color: Colors.black12,
-                                borderRadius: BorderRadius.circular(5.0),
-                              ),
+                                  color: Colors.black12,
+                                  borderRadius: BorderRadius.circular(5.0)),
                               child: ListTile(
-                                title: Text(
-                                  assignment.name,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold),
-                                ),
+                                title: Text(assignment.name,
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold)),
                                 subtitle: Text(
-                                  'Due Date: ${DateFormat.yMMMd().format(assignment.dueDate)}',
-                                ),
+                                    'Due Date: ${DateFormat.yMMMd().format(assignment.dueDate)}'),
                                 onTap: () {
                                   GoRouter.of(context).push(
-                                    '/single-assignment',
-                                    extra: assignment,
-                                  );
+                                      '/single-assignment',
+                                      extra: assignment);
                                 },
                               ),
                             );
@@ -174,34 +136,26 @@ class CoursesScreen extends StatelessWidget {
                       ],
                       if (courseNotes.isNotEmpty) ...[
                         const SizedBox(height: 20),
-                        Text(
-                          'Notes',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: primaryColor,
-                          ),
-                        ),
+                        Text('Notes',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: primaryColor)),
                         const SizedBox(height: 10),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: courseNotes.map((note) {
                             return Container(
                               decoration: BoxDecoration(
-                                color: Colors.black12,
-                                borderRadius: BorderRadius.circular(5.0),
-                              ),
+                                  color: Colors.black12,
+                                  borderRadius: BorderRadius.circular(5.0)),
                               child: ListTile(
-                                title: Text(
-                                  note.title,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold),
-                                ),
+                                title: Text(note.title,
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold)),
                                 subtitle: Text('Section: ${note.section}'),
                                 onTap: () {
-                                  GoRouter.of(context).push(
-                                    '/single-note',
-                                    extra: note,
-                                  );
+                                  GoRouter.of(context)
+                                      .push('/single-note', extra: note);
                                 },
                               ),
                             );

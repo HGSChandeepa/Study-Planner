@@ -54,8 +54,8 @@ class _CreateNotePageState extends State<CreateNotePage> {
         imageData: _selectedImage != null ? File(_selectedImage!.path) : null,
       );
 
-      // Call the createAssignment method from the NoteService
-      await NoteService().createAssignment(
+      // Create the note
+      await NoteService().createNote(
         widget.courseId,
         note,
       );
